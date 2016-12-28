@@ -12,12 +12,11 @@ before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destr
      @group = Group.new
    end
 
-    def show
-      @group = Group.find(params[:id])
+   def show
+     @group = Group.find(params[:id])
+     @posts = @group.posts.recent.paginate(:page => params[:page], :per_page => 5)
+   end
 
-      @posts = @group.posts.recent
-      
-    end
 
      def edit
      end
